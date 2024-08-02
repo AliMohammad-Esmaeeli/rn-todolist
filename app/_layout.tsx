@@ -14,6 +14,8 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    YekanBakh: require("@/assets/fonts/YekanBakh.ttf"),
+    IphoneEmoji: require("@/assets/fonts/ios15.4emoji.ttf")
   });
 
   useEffect(() => {
