@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { Image, Pressable, Text, View, TextInput } from "react-native";
+import { Image, TouchableOpacity, Text, View, TextInput, Touchable } from "react-native";
 import { Dialog } from 'react-native-simple-dialogs';
 import SelectDropdown from 'react-native-select-dropdown'
 import TodoType from "./TodoType";
@@ -18,11 +18,11 @@ export default function FAB(props: PropsType) {
     const [_priority, _setPriority] = useState<string | undefined | null>();
     return (
         <>
-            <Pressable onPress={() => setVisible(true)}>
+            <TouchableOpacity onPress={() => setVisible(true)}>
                 <View className='bg-[#79d0fd] h-16 w-16 rounded-full shadow-lg absolute bottom-10 left-24 flex justify-center items-center'>
                     <Image className='h-10 w-10' source={require("@/assets/images/icons/add.png")}></Image>
                 </View>
-            </Pressable>
+            </TouchableOpacity>
 
             <Dialog
                 visible={visible}
@@ -51,18 +51,18 @@ export default function FAB(props: PropsType) {
                     </TextInput>
 
                     <View className="flex flex-row justify-center items-center gap-5">
-                        <Pressable onPress={() => _setColor("bg-red-500")}>
+                        <TouchableOpacity onPress={() => _setColor("bg-red-500")}>
                             <View className="rounded-full h-10 w-10 bg-red-500"></View>
-                        </Pressable>
-                        <Pressable onPress={() => _setColor("bg-blue-500")}>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => _setColor("bg-blue-500")}>
                             <View className="rounded-full h-10 w-10 bg-blue-500"></View>
-                        </Pressable>
-                        <Pressable onPress={() => _setColor("bg-yellow-500")}>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => _setColor("bg-yellow-500")}>
                             <View className="rounded-full h-10 w-10 bg-yellow-500"></View>
-                        </Pressable>
-                        <Pressable onPress={() => _setColor("bg-green-500")}>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => _setColor("bg-green-500")}>
                             <View className="rounded-full h-10 w-10 bg-green-500"></View>
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
 
                     <SelectDropdown
@@ -85,10 +85,10 @@ export default function FAB(props: PropsType) {
                             );
                         }} />
                     <View className="flex justify-end items-center flex-row gap-8">
-                        <Pressable onPress={() => setVisible(false)} >
+                        <TouchableOpacity onPress={() => setVisible(false)} >
                             <Text className="text-base text-blue-400" style={{ fontFamily: "YekanBakh" }}>بیخیال</Text>
-                        </Pressable>
-                        <Pressable onPress={() => {
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
                             setVisible(false);
                             props.setWorks([...props.works, {
                                 id: `${Math.random()}`,
@@ -105,7 +105,7 @@ export default function FAB(props: PropsType) {
                             _setPriority(null)
                         }}>
                             <Text className="text-base text-blue-400" style={{ fontFamily: "YekanBakh" }} >حله</Text>
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Dialog>
