@@ -11,7 +11,7 @@ interface PropsType {
 
 export default function TodoItem(props: PropsType) {
     return (
-        <View className={`flex justify-around items-center flex-row gap-10 my-3 rounded-3xl w-96 h-32 pb-6 ${props.item.item.color}`}>
+        <View className={`flex justify-around items-center flex-row gap-10 my-3 rounded w-96 h-32 pb-6 ${props.item.item.color}`}>
             <View className='flex justify-center items-center flex-col gap-2'>
                 <Pressable onPress={() => {
                     props.setWorks(
