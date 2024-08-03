@@ -7,6 +7,7 @@ import TodoType from '@/components/Todo/TodoType';
 import Order from '@/components/Todo/Order';
 import TodoItem from '@/components/Todo/TodoItem';
 import NewTodoNotFound from '@/components/Todo/NewTodoNotFound';
+import FAB from '@/components/Todo/FAB';
 
 
 
@@ -34,6 +35,12 @@ export default function HomeScreen() {
             <NewTodoNotFound />
         }
       </View>
+
+      {/* FAB */}
+      <FAB
+        works={works}
+        setWorks={setWorks}
+      />
     </View>
   );
 }
