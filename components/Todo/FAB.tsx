@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { Image, TouchableOpacity, Text, View, TextInput, Touchable } from "react-native";
+import { Image, TouchableOpacity, Text, View, TextInput, ToastAndroid } from "react-native";
 import { Dialog } from 'react-native-simple-dialogs';
 import SelectDropdown from 'react-native-select-dropdown'
 import TodoType from "./TodoType";
@@ -26,7 +26,13 @@ export default function FAB(props: PropsType) {
 
             <Dialog
                 visible={visible}
-                onTouchOutside={() => setVisible(false)}
+                onTouchOutside={() => {
+                    setVisible(false)
+                    _setTitle(null)
+                    _setDescription(null)
+                    _setColor(null)
+                    _setPriority(null)
+                }}
                 onRequestClose={() => { }}
                 contentInsetAdjustmentBehavior="never"
             >
@@ -66,8 +72,8 @@ export default function FAB(props: PropsType) {
                     </View>
 
                     <SelectDropdown
-                        data={[{ Name: "پایین", Num: 0 }, { Name: "متوسط", Num: 1 }, { Name: "بالا", Num: 2 }, { Name: "اضطراری", Num: 3 }]}
-                        onSelect={(selectedItem) => _setPriority(selectedItem.Name)}
+                        data={["پایین", "متوسط", "بالا", "اضطراری"]}
+                        onSelect={(selectedItem) => _setPriority(selectedItem)}
                         renderButton={(selectedItem, isOpened) => {
                             return (
                                 <View>
@@ -80,25 +86,37 @@ export default function FAB(props: PropsType) {
                         renderItem={(item, index, isSelected) => {
                             return (
                                 <View className="border-2 border-black">
-                                    <Text className="text-base m-2" style={{ fontFamily: "YekanBakh" }}>{item.Name}</Text>
+                                    <Text className="text-base m-2" style={{ fontFamily: "YekanBakh" }}>{item}</Text>
                                 </View>
                             );
                         }} />
                     <View className="flex justify-end items-center flex-row gap-8">
-                        <TouchableOpacity onPress={() => setVisible(false)} >
+                        <TouchableOpacity onPress={() => {
+                            setVisible(false)
+                            _setTitle(null)
+                            _setDescription(null)
+                            _setColor(null)
+                            _setPriority(null)
+                        }} >
                             <Text className="text-base text-blue-400" style={{ fontFamily: "YekanBakh" }}>بیخیال</Text>
                         </TouchableOpacity>
+
                         <TouchableOpacity onPress={() => {
                             setVisible(false);
-                            props.setWorks([...props.works, {
-                                id: `${Math.random()}`,
-                                title: _title!,
-                                description: _description!,
-                                done: false,
-                                time: `${new Date().toISOString}`,
-                                color: _color === null ? "bg-blue-400" : _color!,
-                                priority: _priority!
-                            }]);
+                            if (_title != null) {
+
+                                props.setWorks([...props.works, {
+                                    id: `${Math.random()}`,
+                                    title: _title!,
+                                    description: _description!,
+                                    done: false,
+                                    time: `${new Date()}`,
+                                    color: _color === null ? "bg-blue-400" : _color!,
+                                    priority: _priority === null ? "متوسط" : _priority!
+                                }]);
+                            } else {
+                                ToastAndroid.show('عنوان برنامه نمیتواند خالی باشد گل من.🙄', ToastAndroid.LONG)
+                            }
                             _setTitle(null)
                             _setDescription(null)
                             _setColor(null)
